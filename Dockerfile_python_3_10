@@ -1,16 +1,28 @@
-FROM python:3.10-slim
+FROM ubuntu:latest
 
-RUN apt update && apt install git wget curl htop aria2 -y
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    NVIDIA_VISIBLE_DEVICES=all \
+    NVIDIA_DRIVER_CAPABILITIES=all 
 
+# Install python3.10
+RUN apt update && apt install software-properties-common -y && \
+    add-apt-repository ppa:deadsnakes/ppa && apt install python3.10 python3.10-venv python3.10-dev -y && \
+    ln -s python3.10 /usr/bin/python
+
+
+RUN apt update && apt install git wget libgl1 libglib2.0-0 google-perftools curl htop aria2 nvtop -y
+
+# Install cod server
 RUN wget -q https://github.com/coder/code-server/releases/download/v4.91.1/code-server-4.91.1-linux-amd64.tar.gz && \
     tar -xf code-server-4.91.1-linux-amd64.tar.gz && \
     rm code-server-4.91.1-linux-amd64.tar.gz && \
     ln -s ${PWD}/code-server-4.91.1-linux-amd64/bin/code-server /usr/local/bin/code-server
 
-WORKDIR /workspace
-
 RUN mkdir -p ~/.local/share/code-server/User
 RUN echo '{"workbench.colorTheme": "Visual Studio Dark", "workbench.startupEditor": "none"}' > ~/.local/share/code-server/User/settings.json
-
+    
+WORKDIR /workspace
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc.so.4
 
 CMD ["code-server", "--host", "0.0.0.0", "--auth", "none", "--port", "8888", "--disable-workspace-trust","/workspace"]
