@@ -37,3 +37,4 @@ There are currently 2 tags with different base images as follows:
 | ------ | ----------------------------------- |
 | ubuntu | `ubuntu:latest`                     |
 | cuda   | `nvcr.io/nvidia/tensorrt:24.01-py3` |
+| yuvraj108c/vscode-server-docker:python-3.10    | `python:3.10-slim` |
