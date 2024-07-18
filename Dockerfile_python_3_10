@@ -10,7 +10,7 @@ RUN wget -q https://github.com/coder/code-server/releases/download/v4.91.1/code-
 WORKDIR /workspace
 
 RUN mkdir -p ~/.local/share/code-server/User
-RUN echo '{"workbench.colorTheme": "Visual Studio Dark", "workbench.startupEditor": "terminal"}' > ~/.local/share/code-server/User/settings.json
+RUN echo '{"workbench.colorTheme": "Visual Studio Dark", "workbench.startupEditor": "none"}' > ~/.local/share/code-server/User/settings.json
 
 
 CMD ["code-server", "--host", "0.0.0.0", "--auth", "none", "--port", "8888", "--disable-workspace-trust","/workspace"]
