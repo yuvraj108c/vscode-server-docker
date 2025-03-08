@@ -1,8 +1,8 @@
 # Stage 1: Download code-server
 FROM alpine AS code-server-download
 RUN apk add --no-cache curl
-RUN curl -fL https://github.com/coder/code-server/releases/download/v4.97.2/code-server-4.97.2-linux-amd64.tar.gz | tar -C /usr/local/lib -xz
-RUN mv /usr/local/lib/code-server-4.97.2-linux-amd64 /usr/local/lib/code-server
+RUN curl -fL https://github.com/coder/code-server/releases/download/v4.96.2/code-server-4.96.2-linux-amd64.tar.gz | tar -C /usr/local/lib -xz
+RUN mv /usr/local/lib/code-server-4.96.2-linux-amd64 /usr/local/lib/code-server
 
 # Stage 2: Final image
 FROM python:3.10-slim
