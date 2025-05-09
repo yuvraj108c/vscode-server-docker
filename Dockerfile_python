@@ -1,11 +1,11 @@
 # Stage 1: Download code-server
 FROM alpine AS code-server-download
 RUN apk add --no-cache curl
-RUN curl -fL https://github.com/coder/code-server/releases/download/v4.96.2/code-server-4.96.2-linux-amd64.tar.gz | tar -C /usr/local/lib -xz
-RUN mv /usr/local/lib/code-server-4.96.2-linux-amd64 /usr/local/lib/code-server
+RUN curl -fL https://github.com/coder/code-server/releases/download/v4.99.4/code-server-4.99.4-linux-amd64.tar.gz | tar -C /usr/local/lib -xz
+RUN mv /usr/local/lib/code-server-4.99.4-linux-amd64 /usr/local/lib/code-server
 
 # Stage 2: Final image
-FROM python:3.10-slim
+FROM python:3.10.12-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
     NVIDIA_VISIBLE_DEVICES=all \
@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN pip install nvitop huggingface_hub hf_transfer && pip cache purge
+RUN pip install nvitop huggingface_hub hf_transfer uv && pip cache purge
 RUN code-server --install-extension ms-python.python
 
 RUN mkdir -p ~/.local/share/code-server/User
