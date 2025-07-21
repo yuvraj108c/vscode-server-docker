@@ -5,7 +5,7 @@ RUN curl -fL https://github.com/coder/code-server/releases/download/v4.102.1/cod
 RUN mv /usr/local/lib/code-server-4.102.1-linux-amd64 /usr/local/lib/code-server
 
 # Stage 2: Final image
-FROM python:3.10.12-slim
+FROM python:3.8.12-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
     NVIDIA_VISIBLE_DEVICES=all \
