@@ -12,6 +12,10 @@ RUN wget -q https://github.com/coder/code-server/releases/download/v4.107.0/code
     rm code-server-4.107.0-linux-amd64.tar.gz && \
     ln -s ${PWD}/code-server-4.107.0-linux-amd64/bin/code-server /usr/local/bin/code-server
 
+RUN code-server --install-extension ms-python.python
+RUN mkdir -p ~/.local/share/code-server/User
+RUN echo '{"workbench.colorTheme": "Visual Studio Dark", "workbench.startupEditor": "none"}' > ~/.local/share/code-server/User/settings.json
+
 WORKDIR /workspace
 
 CMD ["code-server", "--host", "0.0.0.0", "--auth", "none", "--port", "8888", "/workspace"]
