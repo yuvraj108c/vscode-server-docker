@@ -1,0 +1,17 @@
+FROM nvcr.io/nvidia/tensorrt:25.12-py3
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=on
+ENV SHELL=/bin/bash
+
+WORKDIR /
+
+RUN wget -q https://github.com/coder/code-server/releases/download/v4.107.0/code-server-4.107.0-linux-amd64.tar.gz && \
+    tar -xf code-server-4.107.0-linux-amd64.tar.gz && \
+    rm code-server-4.107.0-linux-amd64.tar.gz && \
+    ln -s ${PWD}/code-server-4.107.0-linux-amd64/bin/code-server /usr/local/bin/code-server
+
+WORKDIR /workspace
+
+CMD ["code-server", "--host", "0.0.0.0", "--auth", "none", "--port", "8888", "/workspace"]

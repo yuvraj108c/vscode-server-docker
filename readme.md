@@ -5,12 +5,17 @@
 - Supports file upload/download
 
 
-## Tags
+## Main Tags
 
 | Tag    | Base Image                          |
 | ------ | ----------------------------------- |
+| tensorrt   | `nvcr.io/nvidia/tensorrt:25.12-py3` |
+| python | `python:3.10.12-slim` |
+
+
+## Sub Tags
+| ------ | ----------------------------------- |
 | ubuntu | `ubuntu:latest`                     |
 | cuda   | `nvcr.io/nvidia/tensorrt:24.01-py3` |
-| python | `python:3.10.12-slim` |
 | python3.8 | `python:3.8.20-slim` |
 | python3.9 | `python:3.9.12-slim` |
