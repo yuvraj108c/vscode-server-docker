@@ -13,7 +13,8 @@
 | python | `python:3.10.12-slim` |
 
 
-## Sub Tags
+## Other Tags
+| Tag    | Base Image                          |
 | ------ | ----------------------------------- |
 | ubuntu | `ubuntu:latest`                     |
 | cuda   | `nvcr.io/nvidia/tensorrt:24.01-py3` |
