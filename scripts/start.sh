@@ -25,7 +25,7 @@ fi
 service ssh start
 
 # Start FileBrowser on port 1111 in the background
-filebrowser --noauth --port 1111 --root /workspace &
+filebrowser --noauth --address 0.0.0.0 --port 1111 --root /workspace &
 
 # Start code-server on port 8888 (foreground)
 code-server --host 0.0.0.0 --auth none --port 8888 --disable-workspace-trust /workspace
