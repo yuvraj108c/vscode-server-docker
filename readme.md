@@ -3,8 +3,9 @@
 [![Build and Push Docker Images](https://github.com/yuvraj108c/vscode-server-docker/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/yuvraj108c/vscode-server-docker/actions/workflows/build-and-push.yml)
 
 - Run vscode via docker & access it on the browser on port 8888
+- FileBrowser web interface on port 1111 for easy file management
 - Perfect for remote development on cloud servers
-- Supports file upload/download
+- Supports file upload/download via FileBrowser
 
 ## Usage
 
@@ -12,8 +13,12 @@ Pull and run an image from DockerHub:
 
 ```bash
 docker pull yuvraj108c/vscode-server:python3.11
-docker run -p 8888:8888 yuvraj108c/vscode-server:python3.11
+docker run -p 8888:8888 -p 1111:1111 yuvraj108c/vscode-server:python3.11
 ```
+
+Access the services:
+- **VS Code**: http://localhost:8888
+- **FileBrowser**: http://localhost:1111
 
 ## Available Tags
 

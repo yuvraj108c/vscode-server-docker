@@ -25,6 +25,7 @@ RUN echo '{"workbench.colorTheme": "Visual Studio Dark", "workbench.startupEdito
 # Install system packages
 RUN apt-get update && apt-get install -y \
     git \
+    curl \
     ffmpeg \
     libgl1 \
     libglib2.0-0 \
@@ -35,6 +36,9 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Install FileBrowser
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
 RUN pip install nvitop huggingface_hub hf_transfer uv
 
 WORKDIR /temp
@@ -42,5 +46,7 @@ COPY --chmod=755 scripts/* /temp
 RUN /temp/setup-ssh.sh
 
 WORKDIR /workspace
+
+EXPOSE 8888 1111
 
 CMD ["/temp/start.sh"]
