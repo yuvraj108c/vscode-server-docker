@@ -28,6 +28,12 @@ jobs:
             tag: python3.12
           - dockerfile: Dockerfile_python_3_13
             tag: python3.13
+          - dockerfile: Dockerfile_cuda_12_4_python_3_10
+            tag: cuda12.4-py3.10
+          - dockerfile: Dockerfile_cuda_12_8_python_3_12
+            tag: cuda12.8-py3.12
+          - dockerfile: Dockerfile_cuda_13_0_python_3_12
+            tag: cuda13.0-py3.12
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

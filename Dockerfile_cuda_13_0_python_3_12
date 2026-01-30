@@ -1,0 +1,46 @@
+FROM nvcr.io/nvidia/tensorrt:25.11-py3
+
+ARG CODE_SERVER_VERSION=4.107.0
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    NVIDIA_VISIBLE_DEVICES=all \
+    NVIDIA_DRIVER_CAPABILITIES=all \
+    HF_HUB_ENABLE_HF_TRANSFER=1
+
+ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=on
+ENV SHELL=/bin/bash
+
+WORKDIR /
+
+RUN wget -q https://github.com/coder/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz && \
+    tar -xf code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz && \
+    rm code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz && \
+    ln -s ${PWD}/code-server-${CODE_SERVER_VERSION}-linux-amd64/bin/code-server /usr/local/bin/code-server
+
+RUN code-server --install-extension ms-python.python
+RUN mkdir -p ~/.local/share/code-server/User
+RUN echo '{"workbench.colorTheme": "Visual Studio Dark", "workbench.startupEditor": "none"}' > ~/.local/share/code-server/User/settings.json
+
+# Install system packages
+RUN apt-get update && apt-get install -y \
+    git \
+    ffmpeg \
+    libgl1 \
+    libglib2.0-0 \
+    aria2 \
+    lz4 \
+    python3.12-venv \
+    --no-install-recommends \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN pip install nvitop huggingface_hub hf_transfer uv && pip cache purge
+
+WORKDIR /temp
+COPY --chmod=755 scripts/* /temp
+RUN /temp/setup-ssh.sh
+
+WORKDIR /workspace
+
+CMD ["/temp/start.sh"]
