@@ -58,8 +58,6 @@ jobs:
           push: true
           build-args: |
             CODE_SERVER_VERSION=${{ steps.code-server-version.outputs.version_num }}
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/vscode-server:${{ matrix.tag }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/vscode-server:${{ matrix.tag }}-${{ steps.code-server-version.outputs.version }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/vscode-server:${{ matrix.tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
