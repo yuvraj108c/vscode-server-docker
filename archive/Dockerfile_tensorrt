@@ -1,0 +1,25 @@
+FROM nvcr.io/nvidia/tensorrt:25.12-py3
+
+ARG CODE_SERVER_VERSION=4.107.0
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=on
+ENV SHELL=/bin/bash
+
+WORKDIR /
+
+RUN wget -q https://github.com/coder/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz && \
+    tar -xf code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz && \
+    rm code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz && \
+    ln -s ${PWD}/code-server-${CODE_SERVER_VERSION}-linux-amd64/bin/code-server /usr/local/bin/code-server
+
+RUN code-server --install-extension ms-python.python
+RUN mkdir -p ~/.local/share/code-server/User
+RUN echo '{"workbench.colorTheme": "Visual Studio Dark", "workbench.startupEditor": "none"}' > ~/.local/share/code-server/User/settings.json
+
+RUN apt update && apt install -y python3.12-venv libgl1 libglib2.0-0 aria2
+
+WORKDIR /workspace
+
+CMD ["code-server", "--host", "0.0.0.0", "--auth", "none", "--port", "8888", "/workspace"]
