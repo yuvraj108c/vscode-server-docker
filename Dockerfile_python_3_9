@@ -1,8 +1,9 @@
 # Stage 1: Download code-server
 FROM alpine AS code-server-download
+ARG CODE_SERVER_VERSION=4.107.0
 RUN apk add --no-cache curl
-RUN curl -fL https://github.com/coder/code-server/releases/download/v4.102.1/code-server-4.102.1-linux-amd64.tar.gz | tar -C /usr/local/lib -xz
-RUN mv /usr/local/lib/code-server-4.102.1-linux-amd64 /usr/local/lib/code-server
+RUN curl -fL https://github.com/coder/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz | tar -C /usr/local/lib -xz
+RUN mv /usr/local/lib/code-server-${CODE_SERVER_VERSION}-linux-amd64 /usr/local/lib/code-server
 
 # Stage 2: Final image
 FROM python:3.9.12-slim

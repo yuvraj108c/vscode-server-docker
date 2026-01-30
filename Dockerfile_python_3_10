@@ -6,7 +6,7 @@ RUN curl -fL https://github.com/coder/code-server/releases/download/v${CODE_SERV
 RUN mv /usr/local/lib/code-server-${CODE_SERVER_VERSION}-linux-amd64 /usr/local/lib/code-server
 
 # Stage 2: Final image
-FROM python:3.8.20-slim
+FROM python:3.10.12-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
     NVIDIA_VISIBLE_DEVICES=all \
