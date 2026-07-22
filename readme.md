@@ -42,3 +42,6 @@ DockerHub: **[yuvraj108c/vscode-server](https://hub.docker.com/r/yuvraj108c/vsco
 | cuda12.4-py3.10 | `yuvraj108c/vscode-server:cuda12.4-py3.10` | `nvcr.io/nvidia/tensorrt:24.03-py3` | 12.4 | 3.10 |
 | cuda12.8-py3.12 | `yuvraj108c/vscode-server:cuda12.8-py3.12` | `nvcr.io/nvidia/tensorrt:25.03-py3` | 12.8 | 3.12 |
 | cuda13.0-py3.12 | `yuvraj108c/vscode-server:cuda13.0-py3.12` | `nvcr.io/nvidia/tensorrt:25.11-py3` | 13.0 | 3.12 |
+| cuda13.1-py3.12 | `yuvraj108c/vscode-server:cuda13.1-py3.12` | `nvcr.io/nvidia/tensorrt:26.02-py3` | 13.1 | 3.12 |
+| cuda13.2-py3.12 | `yuvraj108c/vscode-server:cuda13.2-py3.12` | `nvcr.io/nvidia/tensorrt:26.05-py3` | 13.2 | 3.12 |
+| cuda13.3-py3.12 | `yuvraj108c/vscode-server:cuda13.3-py3.12` | `nvcr.io/nvidia/tensorrt:26.06-py3` | 13.3 | 3.12 |
